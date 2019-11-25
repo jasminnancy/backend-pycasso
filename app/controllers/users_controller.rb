@@ -3,11 +3,13 @@ class UsersController < ApplicationController
 
     def index
         @users = User.all
-        render json: @users, :except => [:password_digest], :include => [:statuses, :following, :followers]
+        render json: @users, :except => [:password_digest], 
+            :include => [:statuses, :following, :followers, :messages, :sent_messages]
     end
  
     def profile
-        render json: { user: current_user }, :except => [:password_digest], :include => [:statuses, :following, :followers]
+        render json: { user: current_user }, :except => [:password_digest], 
+            :include => [:statuses, :following, :followers, :messages, :sent_messages]
     end
    
     def create
@@ -26,6 +28,15 @@ class UsersController < ApplicationController
             render json: { message: 'user successfully updated' }
         else
             render json: { error: 'could not update user'}, status: :not_acceptable
+        end
+    end
+
+    def destroy
+        user = User.find_by(id: params['id'])
+        if user.destroy
+            render json: { message: 'User successfully destroyed' }
+        else
+            render json: { message: 'Could not delete user. Please try again.'}
         end
     end
    
