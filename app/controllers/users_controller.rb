@@ -19,6 +19,15 @@ class UsersController < ApplicationController
             render json: { error: 'failed to create user' }, status: :not_acceptable
         end
     end
+
+    def update
+        user = User.find_by(id: params['id'])
+        if user.update(user_params)
+            render json: { message: 'user successfully updated' }
+        else
+            render json: { error: 'could not update user'}, status: :not_acceptable
+        end
+    end
    
     private
     def user_params
