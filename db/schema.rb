@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_011858) do
+ActiveRecord::Schema.define(version: 2019_12_04_223310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 2019_12_04_011858) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "reviewed_id"
     t.integer "user_id"
@@ -76,6 +83,10 @@ ActiveRecord::Schema.define(version: 2019_12_04_011858) do
     t.boolean "verified", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "profile_pic"
+    t.string "feature_one"
+    t.string "feature_two"
+    t.string "feature_three"
   end
 
   create_table "verifications", force: :cascade do |t|

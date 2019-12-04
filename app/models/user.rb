@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
     has_many :statuses
     has_one :verification
+    has_many :photos
 
     validates :username, presence: true, uniqueness: { case_sensitive: false }
     has_secure_password
