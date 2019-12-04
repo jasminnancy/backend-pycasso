@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
-    belongs_to :recipient, class_name: "User", foreign_key: "recipient_id"
-    belongs_to :sender, class_name: "User", foreign_key: "sender_id"
-    scope :unread, -> { where read: false }
+    belongs_to :conversation
+    belongs_to :user
+
+    validates_presence_of :body, :conversation_id, :user_id
 end
