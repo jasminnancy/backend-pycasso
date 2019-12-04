@@ -11,6 +11,23 @@ class StatusesController < ApplicationController
         end
     end
 
+    def update
+        status = Status.find_by(id: params[:id])
+        status.hearts += 1
+        if status.save
+            render json: status
+        end
+    end
+    
+    def destroy
+        status = Status.find_by(id: params[:id])
+        if status.destroy
+            render json: {message: 'Status deleted'}
+        else
+            render json: {message: 'Status could not be deleted'}
+        end
+    end
+
     private
     def status_params
         params.require(:status).permit(:user_id, :content, :hearts)

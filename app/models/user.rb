@@ -5,8 +5,12 @@ class User < ApplicationRecord
     has_many :following_relationships, foreign_key: :user_id, class_name: 'Follow'
     has_many :following, through: :following_relationships, source: :following
 
-    has_many :messages, class_name: "Message", foreign_key: "recipient_id"
-    has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
+    # has_many :conversations
+    # has_many :messages, class_name: "Message", foreign_key: "recipient_id"
+    # has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
+
+    has_many :reviews, class_name: "Review", foreign_key: "reviewed_id"
+    has_many :sent_reviews, class_name: "Review", foreign_key: "user_id"
 
     has_many :statuses
     has_one :verification
