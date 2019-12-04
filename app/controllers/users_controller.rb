@@ -4,12 +4,12 @@ class UsersController < ApplicationController
     def index
         @users = User.all
         render json: @users, :except => [:password_digest], 
-            :include => [:statuses, :following, :followers, :reviews]
+            :include => [:statuses, :following, :followers, :reviews, :close_friends]
     end
  
     def profile
         render json: { user: current_user }, :except => [:password_digest], 
-            :include => [:statuses, :following, :followers, :reviews]
+            :include => [:statuses, :following, :followers, :reviews, :close_friends]
     end
    
     def create
