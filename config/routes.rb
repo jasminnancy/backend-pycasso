@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :verifications, only: [:index, :create]
   resources :messages, only: [:update]
   resources :conversations, only: [:create]
+  resources :photos, only: [:destroy]
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
   post '/find', to: 'follows#removeFollow'

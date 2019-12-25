@@ -36,4 +36,14 @@ class PhotosController < ApplicationController
             render json: user
         end
     end
+
+    def destroy
+        photo = Photo.find_by(id: params['id'])
+        id = photo.id
+        if photo.destroy
+            render json: params['id']
+        else
+            render json: { message: 'error' }
+        end
+    end
 end
